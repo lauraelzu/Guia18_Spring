@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Listado de autores</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+   
+    </head>
+    <body>
+        <div>
+            <h1 align="center">Listado de autores</h1>
+        </div>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Id del Autor</th>
+                    <th scope="col">Nombre del autor</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody th:each="autor : ${autores}">
+                <tr>
+                    <th scope="row" th:text="${autor.id}"></th>
+                    <td th:text="${autor.nombre}"></td>
+                    <td>
+                        <a th:href="@{/autor/modificar/__${autor.id}__}"><i>Modificar</i></a>
+                    </td>
+                </tr> 
+               
+            </tbody>
+        </table>
+        
+        
+        <!--en caso de éxito muestra el mensaje de éxito de la validación que tiene la llave "exito"-->
+        <div th:if="${exito != null}" class="card text-white bg-succes mb-3 mt-3 mensajeExito">
+        <!--<div class="card text-white bg-succes mb-3 mt-3 mensajeExito">-->
+            <div class="card-body">
+                <h5 class="card-title">Exito</h5>
+                <p class="card-text" th:text="${exito}"></p>
+                <!--<p class="card-text"></p>-->
+            </div>
+        </div>
+       <!--en caso de error muestra el mensaje de error de la validación que tiene la llave "error"-->
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+        <!--<div class="card text-white bg-danger mb-3 mensajeError">-->
+            <div class="card-body">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+                <!--<p class="card-text"></p>-->                    
+            </div>
+        </div>
+        
+       <a class="btn btn-primary" href="../" role="button">Inicio</a> 
+    </body>
+</html>
